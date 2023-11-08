@@ -18,9 +18,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'firstName',
+        'lastName',
+         'phoneNumber',
         'email',
         'password',
+        'image'
     ];
 
     /**
@@ -41,4 +44,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function review(){
+        return $this->hasMany(Review::class);
+    }
+
+    public function flightReview(){
+        return $this->hasMany(FlightReview::class);
+    }
+
+    public function flightBooking(){
+        return $this->hasMany(FlightBooking::class);
+    }
+
+    public function roomBooking(){
+        return $this->hasMany(RoomBooking::class);
+    }
+
+    public function hotelReview(){
+        return $this->hasMany(HotelReview::class);
+    }
 }
