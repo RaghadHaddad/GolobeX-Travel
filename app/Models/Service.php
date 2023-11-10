@@ -11,14 +11,16 @@ class Service extends Model
     protected $fillable = [
         'serviceName',
         'servicePrice',
+        'flight_id',
+        'hotel_id'
 
     ];
 
     public function flight(){
-        return $this->belongsTo(Flight::class);
+        return $this->belongsTo(Flight::class,'flight_id');
     }
 
     public function hotel(){
-        return $this->belongsTo(Hotel::class);
+        return $this->belongsTo(Hotel::class,'hotel_id');
     }
 }

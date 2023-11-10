@@ -21,7 +21,7 @@ class CreateHotelsTable extends Migration
             $table->enum('hotelType',['hotel','motel','resort']);
             $table->float('averageReview');
             $table->enum('rating',['1','2','3','4','5']);
-            $table->string('description');
+            $table->longtext('description');
             $table->boolean('like');
             $table->timestamps();
         });

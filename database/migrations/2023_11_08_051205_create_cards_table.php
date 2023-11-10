@@ -19,6 +19,7 @@ class CreateCardsTable extends Migration
             $table->datetime('expDate');
             $table->string('country');
             $table->foreignId('payment_id')->references('id')->on('payments');
+            $table->integer('cvc');
             $table->timestamps();
         });
     }

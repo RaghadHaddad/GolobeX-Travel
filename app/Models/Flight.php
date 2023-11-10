@@ -9,6 +9,7 @@ class Flight extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'company_id',
         'fromPlace',
         'toPlace',
         'fromTime',
@@ -21,7 +22,7 @@ class Flight extends Model
     ];
 
     public function company(){
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(Company::class,'company_id');
     }
 
     public function flightBooking(){

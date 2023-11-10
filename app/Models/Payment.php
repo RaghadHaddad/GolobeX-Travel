@@ -13,11 +13,13 @@ class Payment extends Model
         'paymentDate',
         'tax',
         'discount',
-        'amount'
+        'amount',
+        'roomBook_id',
+        'book_id'
     ];
 
     public function flightBooking(){
-        return $this->belongsTo(FlightBooking::class);
+        return $this->belongsTo(FlightBooking::class,'book_id');
     }
 
     public function card(){
@@ -25,6 +27,6 @@ class Payment extends Model
     }
 
     public function roomBooking(){
-        return $this->belongsTo(RoomBooking::class);
+        return $this->belongsTo(RoomBooking::class,'roomBook_id');
     }
 }

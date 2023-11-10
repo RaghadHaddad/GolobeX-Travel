@@ -17,7 +17,7 @@ class CreateReviewsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->string('reviewText');
-            $table->string('reviewDesc');
+            $table->longtext('reviewDesc');
             $table->enum('rating',['1','2','3','4','5']);
             $table->timestamps();
         });

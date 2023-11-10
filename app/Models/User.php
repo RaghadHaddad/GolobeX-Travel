@@ -20,7 +20,7 @@ class User extends Authenticatable
     protected $fillable = [
         'firstName',
         'lastName',
-         'phoneNumber',
+        'phoneNumber',
         'email',
         'password',
         'image'
@@ -46,7 +46,7 @@ class User extends Authenticatable
     ];
 
     public function review(){
-        return $this->hasMany(Review::class);
+        return $this->hasOne(Review::class);
     }
 
     public function flightReview(){

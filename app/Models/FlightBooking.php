@@ -9,6 +9,8 @@ class FlightBooking extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'user_id',
+        'flight_id',
         'bookDate',
         'numberOfPassenegers',
         'class',
@@ -18,11 +20,11 @@ class FlightBooking extends Model
 
     
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id');
     }
 
     public function flight(){
-        return $this->belongsTo(Flight::class);
+        return $this->belongsTo(Flight::class,'flight_id');
     }
 
     public function payment(){

@@ -14,11 +14,11 @@ class CreateFlightReviewsTable extends Migration
     public function up()
     {
         Schema::create('flight_reviews', function (Blueprint $table) {
-            $table->id();
+            $table->primary(['user_id', 'company_id']);
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('company_id')->references('id')->on('companies');
             $table->string('reviewText');
-            $table->string('reviewDesc');
+            $table->longtext('reviewDesc');
             $table->enum('rating',['1','2','3','4','5']);
             $table->timestamps();
         });

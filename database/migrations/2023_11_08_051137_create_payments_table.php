@@ -16,12 +16,12 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->string('paymentMethod');
-            $table->date('paymentDate');
+            $table->datetime('paymentDate');
             $table->float('tax');
             $table->float('discount');
             $table->float('amount');
-            $table->foreignId('roomBook_id')->references('id')->on('roomBooks');
-            $table->foreignId('book_id')->references('id')->on('flightBooks');
+            $table->foreignId('roomBook_id')->references('id')->on('room_books');
+            $table->foreignId('book_id')->references('id')->on('flight_books');
             $table->timestamps();
         });
     }

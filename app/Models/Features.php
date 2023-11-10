@@ -9,10 +9,11 @@ class Features extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'hotel_id',
         'featuresName'
     ];
 
     public function hotel(){
-        return $this->belongsTo(Hotel::class);
+        return $this->belongsTo(Hotel::class,'hotel_id');
     }
 }

@@ -11,10 +11,12 @@ class Card extends Model
     protected $fillable = [
         'cardNumber',
         'expDate',
-        'country'
+        'country',
+        'payment_id',
+        'cvc'
     ];
 
     public function payment(){
-        return $this->belongsTo(Payment::class);
+        return $this->belongsTo(Payment::class,'payment_id');
     }
 }

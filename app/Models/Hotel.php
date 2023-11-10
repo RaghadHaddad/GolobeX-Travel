@@ -32,6 +32,6 @@ class Hotel extends Model
     }
 
     public function features(){
-        return $this->hasOne(Features::class);
+        return $this->hasMany(Features::class);
     }
 }

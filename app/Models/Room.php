@@ -12,6 +12,7 @@ class Room extends Model
         'roomType',
         'bedNum',
         'startPrice',
+        'hotel_id'
         
     ];
 
@@ -20,6 +21,6 @@ class Room extends Model
     }
 
     public function hotel(){
-        return $this->belongsTo(Hotel::class);
+        return $this->belongsTo(Hotel::class,'hotel_id');
     }
 }
