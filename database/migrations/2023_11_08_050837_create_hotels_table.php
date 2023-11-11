@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateHotelsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('hotels', function (Blueprint $table) {
+            $table->id();
+            $table->string('hotelName');
+            $table->string('hotelImage');
+            $table->string('location');
+            $table->enum('hotelType',['hotel','motel','resort']);
+            $table->float('averageReview');
+            $table->enum('rating',['1','2','3','4','5']);
+            $table->longtext('description');
+            $table->boolean('like');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('hotels');
+    }
+}
