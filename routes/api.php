@@ -8,6 +8,14 @@ use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\PhoneNumberController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\HotelController;
+use App\Http\Controllers\RoomBookingController;
+use App\Http\Controllers\InvoiceHotelController;
+
+
+
+
 
 
 
@@ -47,4 +55,14 @@ Route::post('/invoices', [InvoiceController::class, 'createInvoice']);
 //Card
 Route::get('/cards', [CardController::class, 'store']);
 
+//For Room
+Route::get('rooms/{roomId}', [RoomController::class, 'getRoomInfo']);
+
+//For Hotel Location
+Route::get('hotels/{hotelId}', [HotelController::class, 'getLocation']);
+
+//For Room Booking
+Route::post('/reservation-dates', [RoomBookingController::class, 'getReservationDates']);
+//Invoice For Hotel
+Route::post('/invoiceshotel', [InvoiceHotelController::class, 'createInvoiceHotel']);
 
