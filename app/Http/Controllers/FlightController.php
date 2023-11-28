@@ -9,6 +9,7 @@ use App\Models\Flight;
 use App\Models\Company;
 use App\Models\FlightReview;
 use App\Traits\FormatTrait;
+use Illuminate\Support\Facades\DB;
 use Mockery\Generator\StringManipulation\Pass\AvoidMethodClashPass;
 
 class FlightController extends Controller
@@ -57,22 +58,38 @@ class FlightController extends Controller
     }
     public function search(Request $request)
     {
-        if($request->has('fromPlace') && $request->has('toPlace') && $request->has('fromTime') && $request->has('toTime')){
-            $query = Flight::with('company')->where('fromPlace', 'like', '%'.$request->fromPlace.'%')
-            ->where('toPlace', 'like', '%'.$request->toPlace.'%')
-            ->where('fromTime','=',$request->fromTime)
-            ->where('toTime','=',$request->toTime)->get();
-        }
+    $flight=new Flight();
+    $companyId=$request->id;
+    $request->validate([
+        'fromPlace' => 'required|string',
+        'toPlace' => 'required|string',
+        'fromTime' => 'required|date',
+        'toTime' => 'required|date',
+    ]);
 
-         if($query)
-        {
-            foreach($query as $q)
-            return $this->ApiFormate([$q->companyImage,$q->fromTime,$q->toTime,$q->duration,$q->road,$q->price],' ',200);
-        }
-        else{
-            return $this->ApiFormate(null,'Not found results ',400);
-        }
+    try {
+        $flight = Flight::with('company')
+        ->where('fromPlace', 'like', '%'.$request->fromPlace.'%')
+        ->where('toPlace', 'like', '%'.$request->toPlace.'%')
+        ->where('fromTime',$request->fromTime)
+        ->where('toTime',$request->toTime)->get();
+
+    } catch (\Exception $e) {
+        // Handle exception (log it, return a response, etc.)
     }
+
+    if($flight->isEmpty()){
+        return $this->ApiFormate(null, 'Not found results ',404);
+    }
+
+    foreach($flight as $f)
+    {
+        $review=FlightReview::where('company_id',$f->company->id)->avg('rating');
+        return $this->ApiFormate([$f->company->companyImage,$f->fromTime, $f->toTime, $f->duration, $f->road,$f->price,$review],' ',200);
+    }
+
+    }
+
     public function show(Request $request,$id)
     {
         $company=Company::where('id',$id)->get(['companyName','companyImage','Address']);
