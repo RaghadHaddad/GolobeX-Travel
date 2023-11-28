@@ -17,8 +17,9 @@ class CreateCompaniesTable extends Migration
             $table->id();
             $table->string('companyName');
             $table->string('companyImage');
-            $table->float('averageReview');
-            $table->boolean('like');
+            $table->string('Address');
+            $table->float('averageReview')->default('0.0');
+            $table->boolean('like')->default('0');
             $table->timestamps();
         });
     }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\FlightController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
@@ -35,13 +37,26 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 //For Company
 Route::get('/companies', [CompanyController::class, 'index']);
 Route::get('/companies/{id}', [CompanyController::class, 'show']);
+//show of Companies
+Route::get('/show/companies',[CompanyController::class,'index']);
+//Add company
+Route::post('/Add/company',[CompanyController::class,'store']);
 
 //For Flights
-Route::get('/flights', [FlightController::class, 'index']);
-Route::get('/flights/{id}', [FlightController::class, 'show']);
+Route::get('/flights', [FlightController::class, 'ForBookDetailIndex']);
+Route::get('/flights/{id}', [FlightController::class, 'ForBookDetailshow']);
+//show of Flights
+Route::get('/show/flights',[FlightController::class,'index']);
+//Add Flight
+Route::post('/Add/flight',[FlightController::class,'store']);
+//search of flight
+Route::get('/flights/search', [FlightController::class, 'search']);
+//join between flight and company
+Route::post('/show/companyDetails/{id}',[FlightController::class,'show']);
 
 //Payment Method
 Route::post('/payment/set-method', [PaymentMethodController::class, 'setPaymentMethod']);
@@ -65,4 +80,8 @@ Route::get('hotels/{hotelId}', [HotelController::class, 'getLocation']);
 Route::post('/reservation-dates', [RoomBookingController::class, 'getReservationDates']);
 //Invoice For Hotel
 Route::post('/invoiceshotel', [InvoiceHotelController::class, 'createInvoiceHotel']);
+
+
+
+
 
