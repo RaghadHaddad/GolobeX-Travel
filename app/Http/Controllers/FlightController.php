@@ -71,8 +71,8 @@ class FlightController extends Controller
         $flight = Flight::with('company')
         ->where('fromPlace', 'like', '%'.$request->fromPlace.'%')
         ->where('toPlace', 'like', '%'.$request->toPlace.'%')
-        ->where('fromTime',$request->fromTime)
-        ->where('toTime',$request->toTime)->get();
+        ->whereDate('fromTime',$request->fromTime)
+        ->whereDate('toTime',$request->toTime)->get();
 
     } catch (\Exception $e) {
         // Handle exception (log it, return a response, etc.)
