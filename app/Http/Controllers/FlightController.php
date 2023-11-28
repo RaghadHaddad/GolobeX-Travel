@@ -20,6 +20,16 @@ class FlightController extends Controller
         $flights = FlightResource::collection(Flight::get(['toPlace','imagePlace','price']));
         return $this->ApiFormate($flights,' ',200);
     }
+      public function ForBookDetailIndex()
+    {
+        $flights = Flight::with('company')->get();
+        return response()->json($flights);
+    }
+       public function ForBookDetailshow($id)
+    {
+        $flight = Flight::with('company')->find($id);
+        return response()->json($flight);
+    }
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -111,30 +121,5 @@ class FlightController extends Controller
                 return $this->ApiFormate(null,'Not Found',400);
              }
         }
-
-
     }
-
-
-
-            // $reviews=Company::with('flightReview')->where('id',$query->company_id);
-        // foreach($reviews as $review)
-        // {
-        // }
-        //  $quereCompany=$query->company()->avg('rating');
-        //  if($request->has('toPlace')){
-            //  $query = Flight::where('toPlace', 'like', '%'.$request->toPlace.'%')->get();
-        //  }
-        //  if($request->has('fromTime')){
-            //  $query = Flight::whereDate('fromTime','=',$request->fromTime)->get();
-        //  }
-        //  if($request->has('toTime')){
-            //  $query = Flight::whereDate('toTime','=',$request->toTime)->get();
-        //  }
-        //  if($request->has('numberOfPassenegers')){
-            //  $query=Flight::with('flightBooking')->where('numberOfPassenegers',$request->numberOfPassenegers);
-        //  }
-        //  if($request->has('class')){
-            //  $query=Flight::with('flightBooking')->where('class',$request->class);
-        //  }
 }

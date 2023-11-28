@@ -16,6 +16,11 @@ class CompanyController extends Controller
         $companies = CompanyResource::collection(Company::get());
         return $this->ApiFormate($companies,' ',200);
     }
+   public function show($id)
+    {
+        $company = Company::find($id);
+        return response()->json($company);
+   }
     public function store(Request $request)
     {
         /*
@@ -72,5 +77,6 @@ class CompanyController extends Controller
         $company->companyImage= $filename ;
 
         return $this->ApiFormate(new CompanyResource($company),'ok',201);
+
     }
 }
