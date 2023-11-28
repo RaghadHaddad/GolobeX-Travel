@@ -11,7 +11,7 @@ class Company extends Model
     protected $fillable = [
         'companyName',
         'companyImage',
-        'averageReview',
+        'Address',
         'like'
     ];
 
